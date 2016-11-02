@@ -5,6 +5,13 @@
     
     <entry>
       <title><![CDATA[扔掉烦人的数据线吧! Android无线调试]]></title>
+      <url>http://yoursite.com/2016/11/02/vim1/</url>
+      <content type="text"><![CDATA[欢迎进入第一章，这一章将学习简单的光标移动操作。 如果你已经有了一定基础，这部分可以略过，直接 G 到文档尾部按照操作进入下一章。 移动光标单位级 h 向左一字符 j 下一行 k 上一行 l 向右一字符 单词级 w or W 向右移动到下一单词开头 e or E 向右移动到单词结尾 b or B 向左移动到单词开头 注意：所有小写单词都是以分词符作为单词界限，大写字母以空格作为界限 在下面字符块中感受一下各种移动吧！ 1234This project&apos;s GitHub url is https://github.com/dofy/learn-vimPlease clone it to your local folder and open the first file which isnamed file-one.md via following command &quot;vim file-one.md&quot;and welcome to http://geekpark.net :) 块级 gg 到文档第一行 G 到文档最后一行 0 到行首（第 1 列） ^ 到第一个非空白字符 $ 到行尾 Ctrl-d 向下移动半页 Ctrl-u 向上移动半页 Ctrl-f 向下移动一页 Ctrl-b 向上移动一页 :&lt;N&gt; or &lt;N&gt;gg 跳转到第 N 行 :+&lt;N&gt; or &lt;N&gt;j 向下跳 N 行 :-&lt;N&gt; or &lt;N&gt;k 向上跳 N 行 注意：所有命令前都可以加一个数字 N，表示对后面的命令执行 N 次，例如你想向下移动 3 行，除了可以用 :+3 之外，还可以用 3j 来实现同样的效果。另外，上面实际上有两种命令：一种是键入后立即执行的，比如 gg；还有一种是先输入 : 的（后面还会出现先按 / 的），这类命令需要在输入完成后按回车执行，后面的教程中也是一样。 现在你可以在当前文件中畅游了，当你熟悉了各种移动操作后就可以通过 G 定位到当前文档到最后一行，按照提示进入下一章了。 将光标定位到后面文件名的任意位置上，直接敲键盘 gf 进入第二章。]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[扔掉烦人的数据线吧! Android无线调试]]></title>
       <url>http://yoursite.com/2016/10/22/Android%20wireless%20debug/</url>
       <content type="text"><![CDATA[让你的手机和 PC 处于同一网络中 连接同一个 WIFI 如果用笔记本的话(比如我) : 用猎豹WIFI开出一个网络,然后手机连接就好 开启网络 adb 调试(android 6.0)打开开发者选项 打开手机的设置 找到关于手机 找到 版本号 并狂按 6 次 , 会提示你已经开启开发者选项 进入设置 - 开发者选项 中 找到 网络 ADB 调试 打开开关会看到开关下面有 ip 和 端口 字样 记下这个数字 在 android 版本低于 6.0 的设备上开启无线调试 (需要 root ) 下载一个名为 adb wireless 的软件 点我下载 安装后打开 , 授予 root 权限后点击屏幕中间的按钮即可 ​ 在 PC 上打开命令行 win+R 输入 cmd 然后 Enter 输入 adb connect 192.168.191.3:5555 此处的 ip: 端口 为刚才我们在手机上看到的 此处可能有坑 , 需要在系统环境变量中加入 Android SDK , 否则只能在 SDK 的目录中运行 adb 命令 OK , 大功告成 ​]]></content>
     </entry>
