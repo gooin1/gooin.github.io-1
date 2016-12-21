@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,18 +84,100 @@
 
 
 
+<meta name="description" content="复制与粘贴Vim 的剪切、复制、粘贴有别于其他编辑器。
+
+
+
+
+命令
+Others
+Vim
+
+
+
+
+复制
+copy
+yank
+
+
+剪切
+cut
+delete
+
+
+粘贴
+paste
+put
+
+
+
+Vim 的 put 命令与粘贴命令完全相同。Vim 的 yank 命令等同于复制操作。至于为什么用 yank 而不是 copy ，这就是历史遗留原因了。 当时的 c 命令被用于 修改（change）操作了，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="扔掉烦人的数据线吧! Android无线调试">
-<meta property="og:url" content="http://yoursite.com/2016/10/22/Android wireless debug/index.html">
+<meta property="og:title" content="Vim 笔记 chapter2">
+<meta property="og:url" content="http://yoursite.com/2016/12/20/Vim chapter2/index.html">
 <meta property="og:site_name" content="gooin">
-<meta property="og:image" content="http://7xlxrz.com1.z0.glb.clouddn.com/android.jpg">
-<meta property="og:image" content="http://7xlxrz.com1.z0.glb.clouddn.com/settings">
-<meta property="og:image" content="http://7xlxrz.com1.z0.glb.clouddn.com/adb_wireless_apk.png">
-<meta property="og:image" content="http://7xlxrz.com1.z0.glb.clouddn.com/adb_connect.png">
-<meta property="og:updated_time" content="2016-12-06T03:57:15.965Z">
+<meta property="og:description" content="复制与粘贴Vim 的剪切、复制、粘贴有别于其他编辑器。
+
+
+
+
+命令
+Others
+Vim
+
+
+
+
+复制
+copy
+yank
+
+
+剪切
+cut
+delete
+
+
+粘贴
+paste
+put
+
+
+
+Vim 的 put 命令与粘贴命令完全相同。Vim 的 yank 命令等同于复制操作。至于为什么用 yank 而不是 copy ，这就是历史遗留原因了。 当时的 c 命令被用于 修改（change）操作了，">
+<meta property="og:updated_time" content="2016-12-21T06:45:10.034Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="扔掉烦人的数据线吧! Android无线调试">
-<meta name="twitter:image" content="http://7xlxrz.com1.z0.glb.clouddn.com/android.jpg">
+<meta name="twitter:title" content="Vim 笔记 chapter2">
+<meta name="twitter:description" content="复制与粘贴Vim 的剪切、复制、粘贴有别于其他编辑器。
+
+
+
+
+命令
+Others
+Vim
+
+
+
+
+复制
+copy
+yank
+
+
+剪切
+cut
+delete
+
+
+粘贴
+paste
+put
+
+
+
+Vim 的 put 命令与粘贴命令完全相同。Vim 的 yank 命令等同于复制操作。至于为什么用 yank 而不是 copy ，这就是历史遗留原因了。 当时的 c 命令被用于 修改（change）操作了，">
 
 
 
@@ -116,10 +198,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/22/Android wireless debug/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/12/20/Vim chapter2/"/>
 
 
-  <title> 扔掉烦人的数据线吧! Android无线调试 | gooin </title>
+  <title> Vim 笔记 chapter2 | gooin </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -282,7 +364,7 @@
             
             
               
-                扔掉烦人的数据线吧! Android无线调试
+                Vim 笔记 chapter2
               
             
           </h1>
@@ -294,8 +376,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-22T15:54:30+08:00" content="2016-10-22">
-              2016-10-22
+            <time itemprop="dateCreated" datetime="2016-12-20T21:57:16+08:00" content="2016-12-20">
+              2016-12-20
             </time>
           </span>
 
@@ -305,8 +387,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/22/Android wireless debug/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/22/Android wireless debug/" itemprop="commentsCount"></span>
+                <a href="/2016/12/20/Vim chapter2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/20/Vim chapter2/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -316,7 +398,7 @@
 
           
           
-             <span id="/2016/10/22/Android wireless debug/" class="leancloud_visitors" data-flag-title="扔掉烦人的数据线吧! Android无线调试">
+             <span id="/2016/12/20/Vim chapter2/" class="leancloud_visitors" data-flag-title="Vim 笔记 chapter2">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -338,45 +420,81 @@
       
 
       
-        <p><img src="http://7xlxrz.com1.z0.glb.clouddn.com/android.jpg" alt="无线调试"></p>
-<a id="more"></a>
-<h3 id="让你的手机和-PC-处于同一网络中"><a href="#让你的手机和-PC-处于同一网络中" class="headerlink" title="让你的手机和 PC 处于同一网络中"></a>让你的手机和 PC 处于同一网络中</h3><ul>
-<li><p>连接同一个 WIFI</p>
-</li>
-<li><p>如果用笔记本的话(比如我) : 用猎豹WIFI开出一个网络,然后手机连接就好</p>
+        <h2 id="复制与粘贴"><a href="#复制与粘贴" class="headerlink" title="复制与粘贴"></a>复制与粘贴</h2><p>Vim 的剪切、复制、粘贴有别于其他编辑器。</p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>Others</th>
+<th>Vim</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>复制</td>
+<td>copy</td>
+<td>yank</td>
+</tr>
+<tr>
+<td>剪切</td>
+<td>cut</td>
+<td>delete</td>
+</tr>
+<tr>
+<td>粘贴</td>
+<td>paste</td>
+<td>put</td>
+</tr>
+</tbody>
+</table>
+<p>Vim 的 put 命令与粘贴命令完全相同。<br>Vim 的 yank 命令等同于复制操作。至于为什么用 yank 而不是 copy ，这就是历史遗留原因了。 当时的 c 命令被用于 修改（change）操作了，所以被迫换成了 yank 这个名字。<br>Vim 的 delete 也与标准的剪切操作一致。该命令会把指定文本复制到寄存器后再从文档中删掉。</p>
+</blockquote>
+<h3 id="用无名寄存器实现删除、复制与粘贴操作"><a href="#用无名寄存器实现删除、复制与粘贴操作" class="headerlink" title="用无名寄存器实现删除、复制与粘贴操作"></a>用无名寄存器实现删除、复制与粘贴操作</h3><pre><code>通常情况下，复制、粘贴和操作指的是操纵系统的剪贴板。在 Vim 中，操作的是寄存器。
+</code></pre><h4 id="调换字符"><a href="#调换字符" class="headerlink" title="调换字符"></a>调换字符</h4><p> 手速太快有时候会习惯性的输错某个单词，常见的比如两个字母的顺序输错了。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Practica lvim</div></pre></td></tr></table></figure></p>
+<p> 上面把 “l” 和空格的顺序输入反了，现在我的光标在最后一个字母 “m” 上， 按下 <em>F<space></space></em> 在本行文本中找到光标之前的空格，按下 <em>x</em> 把光标下的字符剪切下来放到无名寄存器。最后按下 <em>p</em> 命令将无名寄存器的内容粘贴到光标后面。<br>  最后把两个命令组合到一起，即 <em>xp</em> ，可以 “调换光标后的两个字符”，现在我的光标在最后一个字母 “m” 上， 按下 <em>F<space></space></em> 在前文中找到空格，按下 <em>x</em> 把光标下的字符剪切下来放到无名寄存器。最后按下 <em>p</em> 命令将无名寄存器的内容粘贴到光标后面。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Practical vim</div></pre></td></tr></table></figure></p>
+<h4 id="调换文本行"><a href="#调换文本行" class="headerlink" title="调换文本行"></a>调换文本行</h4><p>  类似的，也可以方便的调换两行文本的顺序。这次，用 <em>dd</em> 命令剪切当前行，将内容放到无名寄存器中，再按下 <em>p</em> 会把内容粘贴到当前行的下一行。<br>  把命令连接起来即 <em>ddp</em> ,可以用来“调换当前行和它的下一行”。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// before</span></div><div class="line"> 我是第二行</div><div class="line"> 我是第一行</div><div class="line"> 我是第三行</div><div class="line"><span class="comment">// after</span></div><div class="line"> 我是第一行</div><div class="line"> 我是第二行</div><div class="line"> 我是第三行</div></pre></td></tr></table></figure></p>
+<h4 id="创建文本行的副本"><a href="#创建文本行的副本" class="headerlink" title="创建文本行的副本"></a>创建文本行的副本</h4><p>  类似调换文本行，创建文本行的副本只需要将剪切行的命令 <em>dd</em> 换成复制一行文本的命令 <em>yy</em> 即可，连起来是 <em>yyp</em>，可以用来“复制当前行并在下一行粘贴文本”。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// before</span></div><div class="line"> 我是第一行</div><div class="line"> 我是第二行</div><div class="line"><span class="comment">// after</span></div><div class="line"> 我是第一行</div><div class="line"> 我是第一行</div><div class="line"> 我是第二行</div></pre></td></tr></table></figure></p>
+<h3 id="深入理解-Vim-寄存器"><a href="#深入理解-Vim-寄存器" class="headerlink" title="深入理解 Vim 寄存器"></a>深入理解 Vim 寄存器</h3><h4 id="引用一个寄存器"><a href="#引用一个寄存器" class="headerlink" title="引用一个寄存器"></a>引用一个寄存器</h4><blockquote>
+<p>Vim 的删除、复制和粘贴都会用到众多寄存器中的一个 。 可以通过给命令加 “{register} 前缀的方式指定要用的寄存器。若不指明，Vim 将使用无名寄存器。</p>
+<ul>
+<li>举例<br>如果想把当前单词复制到寄存器 a 中， 可以执行 <em>“ayiw</em> 。<br>把当前整行文本剪切到寄存器 b 中， 可以执行 <em>“bdd</em> 。</li>
+</ul>
+<p>“ap 可以粘贴来及寄存器 a 的单词， “bp 可以粘贴来及寄存器 b 的一行文本，两者互不干扰。</p>
+<h4 id="无名寄存器（””）"><a href="#无名寄存器（””）" class="headerlink" title="无名寄存器（””）"></a>无名寄存器（””）</h4><p>倘若我们没有指定使用寄存器， Vim 将缺省使用无名寄存器，它可以双引号表示。</p>
+<ul>
+<li>举例<br>例如 “”p 这个命令，他完全等同于 p 命令。</li>
+</ul>
+</blockquote>
+<h4 id="复制专用寄存器-（”0）"><a href="#复制专用寄存器-（”0）" class="headerlink" title="复制专用寄存器 （”0）"></a>复制专用寄存器 （”0）</h4><blockquote>
+<p>当使用 y{motion} 命令时，要复制的文本不仅会拷贝到无名寄存器中，同时也拷贝到了复制专用寄存器中。后者可以用数字 “0” 加以引用。</p>
+<ul>
+<li>举例<br>例如有以下代码<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myCat1 = <span class="keyword">new</span> cat();</div><div class="line"><span class="keyword">var</span> myCat2 = <span class="keyword">new</span> dog();</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="开启网络-adb-调试-android-6-0"><a href="#开启网络-adb-调试-android-6-0" class="headerlink" title="开启网络 adb 调试(android 6.0)"></a>开启网络 adb 调试(android 6.0)</h3><h4 id="打开开发者选项"><a href="#打开开发者选项" class="headerlink" title="打开开发者选项"></a>打开开发者选项</h4><ul>
-<li>打开手机的设置</li>
-<li>找到关于手机</li>
-<li>找到 <strong>版本号</strong> 并狂按 6 次 , 会提示你已经开启开发者选项</li>
-<li>进入设置 - 开发者选项 中</li>
+</blockquote>
+<p> 现在想要把 “dog” 换为 “cat”。若是之前不知道寄存器这个概念的话，场景会是这样：</p>
+<ol>
+<li>光标到 “cat” 上面，按下 yiw 复制这个单词</li>
+<li>把光标移动到 “dog” 上面，按下 diw 删除这个单词</li>
+<li>按下 p 粘贴</li>
+<li>变成傻逼：本来想粘贴 “cat” 的，结果粘贴的内容却是 “dog” ,第一步复制的 “cat” 不见了</li>
+</ol>
+<p>发生这个问题原因是一直使用的是无名寄存器，当删除单词时，删除操作会把单词放到无名寄存器中，把之前复制的内容给“挤”走了。</p>
+<p>现在有了复制专用寄存器就不虚了。在最后粘贴的时候按下 “0p 而不是 p 就完美的解决了这个问题。<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myCat1 = <span class="keyword">new</span> cat();</div><div class="line"><span class="keyword">var</span> myCat2 = <span class="keyword">new</span> cat();</div></pre></td></tr></table></figure></p>
+<h4 id="有名寄存器（”a-“z）"><a href="#有名寄存器（”a-“z）" class="headerlink" title="有名寄存器（”a - “z）"></a>有名寄存器（”a - “z）</h4><blockquote>
+<p>Vim 提供了一组以 26 个英文字母命名的寄存器，这意味着我们可以复制、剪切或者粘贴多达 26 段文本。<br>上面改名字的问题使用有名寄存器也能很轻松地解决，这里就不再赘述了。</p>
+</blockquote>
+<ul>
+<li>用小写字母引用有名寄存器，会覆盖该寄存器的原有内容。</li>
+<li>用大写字母引用有名寄存器，会将新内容添加到原有内容之后。<h4 id="黑洞寄存器-（”-）"><a href="#黑洞寄存器-（”-）" class="headerlink" title="黑洞寄存器 （”_）"></a>黑洞寄存器 （”_）</h4></li>
 </ul>
-<h4 id="找到-网络-ADB-调试-打开开关"><a href="#找到-网络-ADB-调试-打开开关" class="headerlink" title="找到 网络 ADB 调试 打开开关"></a>找到 <strong>网络 ADB 调试</strong> 打开开关</h4><p>会看到开关下面有 ip 和 端口 字样</p>
-<p><img src="http://7xlxrz.com1.z0.glb.clouddn.com/settings" alt="ip和端口"></p>
-<p><strong>记下这个数字</strong></p>
-<h3 id="在-android-版本低于-6-0-的设备上开启无线调试-需要-root"><a href="#在-android-版本低于-6-0-的设备上开启无线调试-需要-root" class="headerlink" title="在 android 版本低于 6.0 的设备上开启无线调试 (需要 root )"></a>在 android 版本低于 6.0 的设备上开启无线调试 (需要 root )</h3><ul>
-<li><p>下载一个名为 adb wireless 的软件 <a href="http://7xlxrz.com1.z0.glb.clouddn.com/adb_wireless.apk" target="_blank" rel="external">点我下载</a></p>
-</li>
-<li><p>安装后打开 , 授予 root 权限后点击屏幕中间的按钮即可</p>
-<p><img src="http://7xlxrz.com1.z0.glb.clouddn.com/adb_wireless_apk.png" alt=""></p>
-<p>​</p>
-</li>
-</ul>
-<h3 id="在-PC-上打开命令行"><a href="#在-PC-上打开命令行" class="headerlink" title="在 PC 上打开命令行"></a>在 PC 上打开命令行</h3><ul>
-<li><p>win+R </p>
-</li>
-<li><p>输入 cmd 然后 Enter </p>
-</li>
-<li><p>输入 adb connect 192.168.191.3:5555</p>
-<p><em>此处的 ip: 端口 为刚才我们在手机上看到的</em></p>
-<p><em>此处可能有坑 , 需要在系统环境变量中加入 Android SDK , 否则只能在 SDK 的目录中运行 adb 命令</em></p>
-</li>
-<li><p>OK , 大功告成</p>
-<p>​</p>
-</li>
-</ul>
-<p><img src="http://7xlxrz.com1.z0.glb.clouddn.com/adb_connect.png" alt="adb_connect"></p>
+<p>想要删除一段文本而不想保留副本时，黑洞寄存器就很管用了。<br> 使用 “_diw 删除一个单词时， 不会将之前无名寄存器的内容覆盖。</p>
+<h4 id="系统剪切板（”-）与选择专用寄存器（”-）"><a href="#系统剪切板（”-）与选择专用寄存器（”-）" class="headerlink" title="系统剪切板（”+）与选择专用寄存器（”*）"></a>系统剪切板（”+）与选择专用寄存器（”*）</h4><p> 到目前为止，讨论的寄存器都是 Vim 内部的，如果想从 Vim 复制内容到外部，则必须使用系统剪切板。</p>
+<blockquote>
+<p>Vim 的加号寄存器与系统剪切板等效，可用 +号引用。<br>比如现在从别的程序中复制了一段文本，在 Vim 中，就可以通过 “+p 命令将其粘贴到 Vim 内部。<br>如果在 Vim 的复制、粘贴和剪切命令之前加上 “+ ，相应的文本会捕捉至系统剪切板。</p>
+<p>在 Windows 和 Mac OS 中， “+ 寄存器 和 “* 寄存器 可以混用。</p>
+</blockquote>
 
       
     </div>
@@ -413,24 +531,18 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag">#Android</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/12/06/thinking-2016-12-6/" rel="next" title="反思">
+                <i class="fa fa-chevron-left"></i> 反思
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/06/thinking-2016-12-6/" rel="prev" title="反思">
-                反思 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -456,8 +568,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/22/Android wireless debug/"
-           data-title="扔掉烦人的数据线吧! Android无线调试" data-url="http://yoursite.com/2016/10/22/Android wireless debug/">
+      <div class="ds-thread" data-thread-key="2016/12/20/Vim chapter2/"
+           data-title="Vim 笔记 chapter2" data-url="http://yoursite.com/2016/12/20/Vim chapter2/">
       </div>
     
   </div>
@@ -561,7 +673,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#让你的手机和-PC-处于同一网络中"><span class="nav-number">1.</span> <span class="nav-text">让你的手机和 PC 处于同一网络中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启网络-adb-调试-android-6-0"><span class="nav-number">2.</span> <span class="nav-text">开启网络 adb 调试(android 6.0)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#打开开发者选项"><span class="nav-number">2.1.</span> <span class="nav-text">打开开发者选项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#找到-网络-ADB-调试-打开开关"><span class="nav-number">2.2.</span> <span class="nav-text">找到 网络 ADB 调试 打开开关</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-android-版本低于-6-0-的设备上开启无线调试-需要-root"><span class="nav-number">3.</span> <span class="nav-text">在 android 版本低于 6.0 的设备上开启无线调试 (需要 root )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-PC-上打开命令行"><span class="nav-number">4.</span> <span class="nav-text">在 PC 上打开命令行</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#复制与粘贴"><span class="nav-number">1.</span> <span class="nav-text">复制与粘贴</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用无名寄存器实现删除、复制与粘贴操作"><span class="nav-number">1.1.</span> <span class="nav-text">用无名寄存器实现删除、复制与粘贴操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#调换字符"><span class="nav-number">1.1.1.</span> <span class="nav-text">调换字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调换文本行"><span class="nav-number">1.1.2.</span> <span class="nav-text">调换文本行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建文本行的副本"><span class="nav-number">1.1.3.</span> <span class="nav-text">创建文本行的副本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深入理解-Vim-寄存器"><span class="nav-number">1.2.</span> <span class="nav-text">深入理解 Vim 寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引用一个寄存器"><span class="nav-number">1.2.1.</span> <span class="nav-text">引用一个寄存器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无名寄存器（””）"><span class="nav-number">1.2.2.</span> <span class="nav-text">无名寄存器（””）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制专用寄存器-（”0）"><span class="nav-number">1.2.3.</span> <span class="nav-text">复制专用寄存器 （”0）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有名寄存器（”a-“z）"><span class="nav-number">1.2.4.</span> <span class="nav-text">有名寄存器（”a - “z）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#黑洞寄存器-（”-）"><span class="nav-number">1.2.5.</span> <span class="nav-text">黑洞寄存器 （”_）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统剪切板（”-）与选择专用寄存器（”-）"><span class="nav-number">1.2.6.</span> <span class="nav-text">系统剪切板（”+）与选择专用寄存器（”*）</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
