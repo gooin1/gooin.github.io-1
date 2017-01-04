@@ -1,0 +1,964 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="宏的读取与执行
+宏允许我们把一段修改序列录制下来，用于之后的回放。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim chapter5 宏(macro)">
+<meta property="og:url" content="http://yoursite.com/2017/01/04/Vim_chapter5/index.html">
+<meta property="og:site_name" content="gooin">
+<meta property="og:description" content="宏的读取与执行
+宏允许我们把一段修改序列录制下来，用于之后的回放。">
+<meta property="og:updated_time" content="2017-01-04T06:19:25.699Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vim chapter5 宏(macro)">
+<meta name="twitter:description" content="宏的读取与执行
+宏允许我们把一段修改序列录制下来，用于之后的回放。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '10943791',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/04/Vim_chapter5/"/>
+
+
+  <title> Vim chapter5 宏(macro) | gooin </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">gooin</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-android">
+          <a href="/android" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-android"></i> <br />
+            
+            android
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-film"></i> <br />
+            
+            电影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Vim chapter5 宏(macro)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-04T09:02:15+08:00" content="2017-01-04">
+              2017-01-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/04/Vim_chapter5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/04/Vim_chapter5/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/04/Vim_chapter5/" class="leancloud_visitors" data-flag-title="Vim chapter5 宏(macro)">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="宏的读取与执行"><a href="#宏的读取与执行" class="headerlink" title="宏的读取与执行"></a>宏的读取与执行</h3><blockquote>
+<p>宏允许我们把一段修改序列录制下来，用于之后的回放。<br><a id="more"></a></p>
+</blockquote>
+<h4 id="把命令序列录制成宏"><a href="#把命令序列录制成宏" class="headerlink" title="把命令序列录制成宏"></a>把命令序列录制成宏</h4><p><code>q</code> 键既是“录制”按钮，也是停止按钮。一开始需要按下 <code>q{register}</code> 来指定一个用于保存宏的寄存器。</p>
+<ul>
+<li>举例：<br>有下面几行代码，需要在每行代码的后面加上 <code>;</code>，在每行代码的前面加上 <code>var</code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">foo = <span class="number">1</span></div><div class="line">bar = <span class="string">'a'</span></div><div class="line">foobar = foo + bar</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>现在光标在第一行的 <code>foo</code> 处。 首先按下 <code>qa</code> 开始录制宏（此时下方的状态栏会显示“记录中”），按下 <code>A;&lt;Esc&gt;</code> 在行尾添加一个分号，然后按下 <code>Ivar&lt;space&gt;&lt;Esc&gt;</code> 在行首添加 <code>var</code> 和空格，最后按下 <code>q</code> 停止录制。<br>可以通过命令查看寄存器中的内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; :reg a</div><div class="line">--- 寄存器 ---</div><div class="line">&quot;a A;^[  Ivar&lt;space&gt;^[</div></pre></td></tr></table></figure></p>
+<p>显示出在寄存器 a 中记录的按键操作。（<code>^[</code> 表示 Esc ）</p>
+<h4 id="通过执行宏来回放命令序列"><a href="#通过执行宏来回放命令序列" class="headerlink" title="通过执行宏来回放命令序列"></a>通过执行宏来回放命令序列</h4><blockquote>
+<p>我们可以用 <code>@{register}</code> 命令执行指定寄存器的内容，也可用 <code>@@</code> 来重复最近调用的宏。<br>现在光标在第一行的 <code>f</code> 处，按下 <code>j</code> ，然后按下 <code>@a</code> 在第二行调用之前录制的宏，会在行尾加上分号，行首加上 <code>var&lt;space&gt;</code>，接着按下 <code>j@@</code> 会在第三行重复操作。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = <span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> bar = <span class="string">'a'</span>;</div><div class="line"><span class="keyword">var</span> foobar = foo + bar;</div></pre></td></tr></table></figure>
+<h4 id="串行执行与并行执行宏"><a href="#串行执行与并行执行宏" class="headerlink" title="串行执行与并行执行宏"></a>串行执行与并行执行宏</h4><p>串行执行就像是串联在一起的灯泡，一个烧坏了，全部都挂了,而并行执行则相反。</p>
+<p>到底是串行好还是并行好呢？</p>
+<blockquote>
+<p><strong>永远都是看情况。</strong></p>
+</blockquote>
+<h3 id="规范光标位置，直达目标以及终止宏"><a href="#规范光标位置，直达目标以及终止宏" class="headerlink" title="规范光标位置，直达目标以及终止宏"></a>规范光标位置，直达目标以及终止宏</h3><p>记住一条黄金法则：在录制宏时，要<strong>确保每条命令都可以重复执行。</strong></p>
+<h4 id="加次数回放宏"><a href="#加次数回放宏" class="headerlink" title="加次数回放宏"></a>加次数回放宏</h4><p>有这样的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">x = <span class="string">"("</span>+a+<span class="string">","</span>+b+<span class="string">","</span>+c+<span class="string">","</span>+d+<span class="string">","</span>+e+<span class="string">","</span>+<span class="string">")"</span>;</div></pre></td></tr></table></figure></p>
+<p>要在每个加号前后都加上空格，在之前第一篇笔记中的点范式可以解决，但是加号实在有点多啊，需要一直按 <code>;.</code> 来重复执行，直到所有加号前后都用空格。<br>当然会想到用 <code>11;.</code> 表面上看起来是执行11次 <code>;.</code> 但实际上 Vim 会运行 11 次 <code>;</code> 命令，然后运行一次 ‘.’ 命令。<br>可以通过录制一个简单的宏来完成：</p>
+<p>键盘的光标在行首的 <code>x</code> 处，按下 <code>f+</code> 找到光标后的第一个加号，接着按下 <code>s&lt;space&gt;+&lt;space&gt;&lt;Esc&gt;</code> 将加号替换为前后都有空格的加号，重要的一步来了，按下 <code>qq;.q</code> 录制宏。这里解释一下：<code>qq</code> 表示将录制的按键操作放置到寄存器 <code>q</code> 中，然后输入 <code>;.</code> 其中分号表示重复 <code>f+</code> 的查找操作，点表示重复上次执行的在加号前后加上空格的操作，最后按下 <code>q</code> 结束录制。<br>然后输入 <code>22@q</code> 将宏执行 22 次，实际只执行 10 次。（为什么是 22 次？ 因为 2 和 @ 在同一个键上，按起来方便，谁会去数宏会执行多少次呢？命令执行失败时，宏会停止执行，所以加上个足够大的数字就行了）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">x = <span class="string">"("</span> + a + <span class="string">","</span> + b + <span class="string">","</span> + c + <span class="string">","</span> + d + <span class="string">","</span> + e + <span class="string">","</span> + <span class="string">")"</span>;</div></pre></td></tr></table></figure></p>
+<h3 id="在连续的文本行上重复修改"><a href="#在连续的文本行上重复修改" class="headerlink" title="在连续的文本行上重复修改"></a>在连续的文本行上重复修改</h3><p>假设有下面的文本，想要将 before 后的内容变成 after 后的内容<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// before</span></div><div class="line"><span class="number">1</span>. one</div><div class="line"><span class="number">2</span>. two</div><div class="line"><span class="number">3</span>. three</div><div class="line"><span class="number">4</span>. four</div><div class="line"><span class="comment">// after</span></div><div class="line"><span class="number">1</span>) One</div><div class="line"><span class="number">2</span>) Two</div><div class="line"><span class="number">3</span>) Three</div><div class="line"><span class="number">4</span>) Four</div></pre></td></tr></table></figure></p>
+<h4 id="录制工作单元"><a href="#录制工作单元" class="headerlink" title="录制工作单元"></a>录制工作单元</h4><p>在第一行上做出修改，将其记录下来<br><code>qq0f.r)w~jq</code> 这是完整的按键。解释一下：<code>qq</code> 就不赘述了，上文有。<code>0</code> 表示将光标移动到行首, <code>f.</code> 找到光标后的 <code>.</code> 并将光标移动到此处， <code>r)</code> 表示将当前所在字符替换为 <code>)</code>，<code>w~</code> 表示将光标跳转到下一个单词的开头，<code>~</code> 表示将当前的单词转换成大写，按下 <code>j</code> 跳转到下一行，最后按下 <code>q</code> 停止录制。<br>在按键过程中，一定要记住可复用</p>
+<h4 id="给宏追加命令"><a href="#给宏追加命令" class="headerlink" title="给宏追加命令"></a>给宏追加命令</h4><p>在上面的录制中，假设忘了在按键中加入 <code>j</code> 宏就没法用了。我才不想重新在写一遍呢！所以追加就很有用了。<br>假设我的按键过程是 <code>qq0f.r)w~q</code> 现在我想给它的结尾处追加 <code>j</code> 。<br>首先先检查一下寄存器的内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; :reg q </div><div class="line">&quot;q 0f.r)w~</div></pre></td></tr></table></figure></p>
+<p>当输入 <code>qq</code> 时，Vim 会记录按键操作保存的寄存器 q 中，覆盖之前的内容，按下 <code>qQ</code> 时，Vim 会把按键操作记录下来追加到寄存器 q 中。<br>此时只要按下 <code>qQjq</code> 就解决问题了。<br>再检查一下寄存器的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; :reg q </div><div class="line">&quot;q 0f.r)w~j</div></pre></td></tr></table></figure>
+<p>发现追加完成，可以使用了。</p>
+<h4 id="以串行方式执行宏"><a href="#以串行方式执行宏" class="headerlink" title="以串行方式执行宏"></a>以串行方式执行宏</h4><p>在第一行录制完成，接着按下 <code>3@q</code> 执行就 ok 了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>) One</div><div class="line"><span class="number">2</span>) Two</div><div class="line"><span class="number">3</span>) Three</div><div class="line"><span class="number">4</span>) Four</div></pre></td></tr></table></figure></p>
+<p>但是遇到点问题，如果多了一行注释的话，就尴尬了。<br>按下 <code>5@q</code> 会发现是这样子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**before**/</span></div><div class="line"><span class="number">1</span>. one</div><div class="line"><span class="number">2</span>. two</div><div class="line"><span class="comment">// Hi, I'm comment  :-)</span></div><div class="line"><span class="number">3</span>. three</div><div class="line"><span class="number">4</span>. four</div><div class="line"></div><div class="line"><span class="comment">/**after**/</span></div><div class="line"><span class="number">1</span>) One</div><div class="line"><span class="number">2</span>) Two</div><div class="line"><span class="comment">// Hi, I'm comment  :-)</span></div><div class="line"><span class="number">3</span>. three</div><div class="line"><span class="number">4</span>. four</div></pre></td></tr></table></figure></p>
+<p>注释之后的没有修改过来，因为在注释那一行 <code>f.</code> 没有发现 <code>.</code> 所以宏被终止执行了。</p>
+<h4 id="以并行方式执行宏"><a href="#以并行方式执行宏" class="headerlink" title="以并行方式执行宏"></a>以并行方式执行宏</h4><p>首先在第一行按下 <code>qq0f.r)w~q</code>录制，这次没有将 <code>j</code> 录制进去，因为这次我们不需要它了。在第一行录制完成后，按下 <code>jVG</code> 会高亮显示第二行到结尾处的所有文本，接着输入 <code>:normal @q</code> 就搞定了。解释一下 <code>:normal @a</code> 表示在高亮区域的每一行都执行这个宏，即使第三行的宏执行失败了，也不会影响其他行执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>. one</div><div class="line"><span class="number">2</span>. two</div><div class="line"><span class="comment">// Hi, I'm comment  :-)</span></div><div class="line"><span class="number">3</span>. three</div><div class="line"><span class="number">4</span>. four</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>) One</div><div class="line"><span class="number">2</span>) Two</div><div class="line"><span class="comment">// Hi, I'm comment  :-)</span></div><div class="line"><span class="number">3</span>) Three</div><div class="line"><span class="number">4</span>) Four</div></pre></td></tr></table></figure>
+<h3 id="用迭代求值的方式给列表编号"><a href="#用迭代求值的方式给列表编号" class="headerlink" title="用迭代求值的方式给列表编号"></a>用迭代求值的方式给列表编号</h3><p>假设有下面的文本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Micro$oft Visual Studio 2010</div><div class="line">JetBrains WebStorm</div><div class="line">Android Studio</div><div class="line">Xshell 5</div><div class="line">gVim 8.0</div><div class="line">IntelLiJ IDEA</div><div class="line">Typora</div><div class="line">OneNote 2013</div><div class="line">ArcMap 10.2</div></pre></td></tr></table></figure></p>
+<p>想要给他编号，变成这个样子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">1) Micro$oft Visual Studio 2010</div><div class="line">2) JetBrains WebStorm</div><div class="line">3) Android Studio</div><div class="line">4) Xshell 5</div><div class="line">5) gVim 8.0</div><div class="line">6) IntelLiJ IDEA</div><div class="line">7) Typora</div><div class="line">8) OneNote 2013</div><div class="line">9) ArcMap 10.2</div></pre></td></tr></table></figure>
+<h4 id="基本的-Vim-脚本"><a href="#基本的-Vim-脚本" class="headerlink" title="基本的 Vim 脚本"></a>基本的 Vim 脚本</h4><p>先练习一下将要用到的几个命令行脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// 使用 let 关键字创建一个名为 i 的变量，将其赋值为 0,</div><div class="line">&gt; :let i=0</div><div class="line">// 用 :echo 命令查看变量的当前值</div><div class="line">&gt; :echo i</div><div class="line">&lt; 0</div><div class="line"></div><div class="line">// 以下语句用于累加 i 的值</div><div class="line">&gt; :let i += 1</div><div class="line">&gt; :echo i</div><div class="line">&lt; 1</div></pre></td></tr></table></figure></p>
+<h4 id="录制宏"><a href="#录制宏" class="headerlink" title="录制宏"></a>录制宏</h4><p>当前光标在文本的第一行</p>
+<ol>
+<li>创建变量 i 并赋值为 1<br><code>:let i=1</code></li>
+<li>开始录制宏，保存在寄存器 q 中<br><code>qq</code></li>
+<li>按下 <code>I</code> 在在行首进入插入模式，然后按下 <code>&lt;C-r&gt;=i&lt;Enter&gt;</code> 按下 <code>Ctrl + r</code> 进入运算模式， <code>=i</code> 调用当前 i 的值，然后按下回车键将值显示到屏幕上，接着按下  <code>)&lt;space&gt;</code> 输入括号和空格。<code>&lt;Esc&gt;</code> 退出输入模式<br><code>I&lt;C-r&gt;=i&lt;Enter&gt;)&lt;space&gt;&lt;Esc&gt;</code></li>
+<li>使 i 的值 +1<br><code>:let i += 1</code>    </li>
+<li>停止录制<br><code>q</code>                   </li>
+</ol>
+<h4 id="执行宏"><a href="#执行宏" class="headerlink" title="执行宏"></a>执行宏</h4><p>当前光标在第一行的 M 之前，按下 <code>jVG</code> 选中第二行到文末的所有文本 ，然后按下<code>:normal @a</code> 就搞定了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">1) Micro$oft Visual Studio 2010</div><div class="line">2) JetBrains WebStorm</div><div class="line">3) Android Studio</div><div class="line">4) Xshell 5</div><div class="line">5) gVim 8.0</div><div class="line">6) IntelLiJ IDEA</div><div class="line">7) Typora</div><div class="line">8) OneNote 2013</div><div class="line">9) ArcMap 10.2</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>thx��</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xlxrz.com1.z0.glb.clouddn.com/wechat-pay.png" alt="gooin WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/31/2016/" rel="next" title="2016总结">
+                <i class="fa fa-chevron-left"></i> 2016总结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/04/Vim_chapter5/"
+           data-title="Vim chapter5 宏(macro)" data-url="http://yoursite.com/2017/01/04/Vim_chapter5/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="gooin" />
+          <p class="site-author-name" itemprop="name">gooin</p>
+          <p class="site-description motion-element" itemprop="description">the world around you is not what seems</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gooin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/goooinn" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#宏的读取与执行"><span class="nav-number">1.</span> <span class="nav-text">宏的读取与执行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#把命令序列录制成宏"><span class="nav-number">1.1.</span> <span class="nav-text">把命令序列录制成宏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过执行宏来回放命令序列"><span class="nav-number">1.2.</span> <span class="nav-text">通过执行宏来回放命令序列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#串行执行与并行执行宏"><span class="nav-number">1.3.</span> <span class="nav-text">串行执行与并行执行宏</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规范光标位置，直达目标以及终止宏"><span class="nav-number">2.</span> <span class="nav-text">规范光标位置，直达目标以及终止宏</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#加次数回放宏"><span class="nav-number">2.1.</span> <span class="nav-text">加次数回放宏</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在连续的文本行上重复修改"><span class="nav-number">3.</span> <span class="nav-text">在连续的文本行上重复修改</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#录制工作单元"><span class="nav-number">3.1.</span> <span class="nav-text">录制工作单元</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#给宏追加命令"><span class="nav-number">3.2.</span> <span class="nav-text">给宏追加命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以串行方式执行宏"><span class="nav-number">3.3.</span> <span class="nav-text">以串行方式执行宏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以并行方式执行宏"><span class="nav-number">3.4.</span> <span class="nav-text">以并行方式执行宏</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用迭代求值的方式给列表编号"><span class="nav-number">4.</span> <span class="nav-text">用迭代求值的方式给列表编号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本的-Vim-脚本"><span class="nav-number">4.1.</span> <span class="nav-text">基本的 Vim 脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#录制宏"><span class="nav-number">4.2.</span> <span class="nav-text">录制宏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行宏"><span class="nav-number">4.3.</span> <span class="nav-text">执行宏</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gooin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gooin-hexo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("N6CbtyX6F9IIshBrbVFPWuAa-gzGzoHsz", "enxXCNpTtaPVrmqlqptan6RI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
